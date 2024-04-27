@@ -5,6 +5,11 @@
   "temporarySuppressionAsExcel": false,
   "analyzerProviderCollectingMode": "LocalCache",
   "mappings": {
+    "sample": {
+      "paths": [
+        "sample"
+      ]
+    },
     "src": {
       "paths": [
         "src"
