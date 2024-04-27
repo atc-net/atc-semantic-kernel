@@ -520,3 +520,12 @@ dotnet_diagnostic.S6605.severity = none             # Collection-specific "Exist
 # Custom - Code Analyzers Rules
 ##########################################
 [*.{cs,csx,cake}]
+
+dotnet_diagnostic.IDE0039.severity = none            # Use local function
+
+dotnet_diagnostic.CA2007.severity = none             # Consider calling ConfigureAwait on the awaited task
+
+dotnet_diagnostic.MA0004.severity = none             # Use Task.Configurewait(false) if the current SynchronizationContext is not needed
+
+dotnet_diagnostic.SA1010.severity = none             # Opening square brackets should not be preceeded by a space
+dotnet_diagnostic.SA1615.severity = none             # Element return value should be documented
