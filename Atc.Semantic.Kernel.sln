@@ -12,13 +12,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{DAC1423F-D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{58BC6728-197C-484C-A8EC-38BC2F0B58C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atc.SemanticKernel.Plugins", "src\Plugins\Atc.SemanticKernel.Plugins\Atc.SemanticKernel.Plugins.csproj", "{673BC3C5-3824-42C2-BF3B-D761192CE7DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atc.SemanticKernel.Plugins", "src\Plugins\Atc.SemanticKernel.Plugins\Atc.SemanticKernel.Plugins.csproj", "{673BC3C5-3824-42C2-BF3B-D761192CE7DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{47F559A0-49DF-48F5-ABD9-8A48962C4D47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Connectors", "Connectors", "{B21D04E9-5AC8-4CC6-8A95-E370CC15046E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atc.SemanticKernel.Connectors.Ollama", "src\Connectors\Atc.SemanticKernel.Connectors.Ollama\Atc.SemanticKernel.Connectors.Ollama.csproj", "{3DAF279B-9CAE-4F4C-B030-AB3B4CAF43FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atc.SemanticKernel.Connectors.Ollama", "src\Connectors\Atc.SemanticKernel.Connectors.Ollama\Atc.SemanticKernel.Connectors.Ollama.csproj", "{3DAF279B-9CAE-4F4C-B030-AB3B4CAF43FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{67FE0C20-D944-47C5-A64E-AC05F7438940}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atc.SemanticKernel.Client.Sample", "sample\Atc.SemanticKernel.Client.Sample\Atc.SemanticKernel.Client.Sample.csproj", "{5C37ED9E-46B8-493C-8260-30EB8DA2B3BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atc.SemanticKernel.WebApp.Sample", "sample\Atc.SemanticKernel.WebApp.Sample\Atc.SemanticKernel.WebApp.Sample.csproj", "{3EFEF526-4EF8-4B13-84CC-63A0F77EEBC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atc.SemanticKernel.Console.Sample", "sample\Atc.SemanticKernel.Console.Sample\Atc.SemanticKernel.Console.Sample.csproj", "{C5299A6E-FAE1-409E-A288-7EE763642DD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +42,18 @@ Global
 		{3DAF279B-9CAE-4F4C-B030-AB3B4CAF43FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DAF279B-9CAE-4F4C-B030-AB3B4CAF43FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DAF279B-9CAE-4F4C-B030-AB3B4CAF43FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C37ED9E-46B8-493C-8260-30EB8DA2B3BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C37ED9E-46B8-493C-8260-30EB8DA2B3BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C37ED9E-46B8-493C-8260-30EB8DA2B3BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C37ED9E-46B8-493C-8260-30EB8DA2B3BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EFEF526-4EF8-4B13-84CC-63A0F77EEBC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EFEF526-4EF8-4B13-84CC-63A0F77EEBC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EFEF526-4EF8-4B13-84CC-63A0F77EEBC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EFEF526-4EF8-4B13-84CC-63A0F77EEBC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5299A6E-FAE1-409E-A288-7EE763642DD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5299A6E-FAE1-409E-A288-7EE763642DD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5299A6E-FAE1-409E-A288-7EE763642DD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5299A6E-FAE1-409E-A288-7EE763642DD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +63,9 @@ Global
 		{47F559A0-49DF-48F5-ABD9-8A48962C4D47} = {69C84246-AA75-43E8-94B2-66FD555B18B0}
 		{B21D04E9-5AC8-4CC6-8A95-E370CC15046E} = {69C84246-AA75-43E8-94B2-66FD555B18B0}
 		{3DAF279B-9CAE-4F4C-B030-AB3B4CAF43FE} = {B21D04E9-5AC8-4CC6-8A95-E370CC15046E}
+		{5C37ED9E-46B8-493C-8260-30EB8DA2B3BD} = {67FE0C20-D944-47C5-A64E-AC05F7438940}
+		{3EFEF526-4EF8-4B13-84CC-63A0F77EEBC9} = {67FE0C20-D944-47C5-A64E-AC05F7438940}
+		{C5299A6E-FAE1-409E-A288-7EE763642DD4} = {67FE0C20-D944-47C5-A64E-AC05F7438940}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {04120463-05C5-417B-8D7A-2D7D35B71A07}

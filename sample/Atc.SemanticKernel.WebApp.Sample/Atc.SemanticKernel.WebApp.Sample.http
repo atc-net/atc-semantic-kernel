@@ -1,0 +1,6 @@
+@Atc.SemanticKernel.WebApp.Sample_HostAddress = http://localhost:5081
+
+GET {{Atc.SemanticKernel.WebApp.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
