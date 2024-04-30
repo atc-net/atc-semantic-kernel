@@ -34,11 +34,20 @@ app.MapGet("/ollama/text-generation/non-streaming", async (string ask, Kernel ke
     .WithName("OllamaTextGenerationNonStreaming")
     .WithOpenApi();
 
-app.MapGet("/ollama/text-generation/streaming", (string ask, Kernel kernel, CancellationToken cancellationToken) =>
+app.MapGet("/ollama/text-generation/streaming", IAsyncEnumerable<string> (string ask, Kernel kernel, CancellationToken cancellationToken) =>
     {
-        var textGenerationService = kernel.GetRequiredService<ITextGenerationService>();
-        var response = textGenerationService.GetStreamingTextContentsAsync(ask, cancellationToken: cancellationToken);
-        return response;
+        return TextGenerationAsync();
+
+        async IAsyncEnumerable<string> TextGenerationAsync()
+        {
+            var textGenerationService = kernel.GetRequiredService<ITextGenerationService>();
+            var response = textGenerationService.GetStreamingTextContentsAsync(ask, cancellationToken: cancellationToken);
+
+            await foreach (var item in response.WithCancellation(cancellationToken))
+            {
+                yield return item.Text ?? string.Empty;
+            }
+        }
     })
     .WithName("OllamaTextGenerationStreaming")
     .WithOpenApi();
@@ -57,16 +66,25 @@ app.MapGet("/ollama/chat-completion/non-streaming", async (string ask, Kernel ke
     .WithName("OllamaChatCompletionNonStreaming")
     .WithOpenApi();
 
-app.MapGet("/ollama/chat-completion/streaming", (string ask, Kernel kernel, CancellationToken cancellationToken) =>
+app.MapGet("/ollama/chat-completion/streaming", IAsyncEnumerable<string> (string ask, Kernel kernel, CancellationToken cancellationToken) =>
     {
-        var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+        return ChatCompletionAsync();
 
-        var chatHistory = new ChatHistory();
-        chatHistory.AddSystemMessage("You are a useful assistant that replies in a very short style");
-        chatHistory.AddUserMessage(ask);
+        async IAsyncEnumerable<string> ChatCompletionAsync()
+        {
+            var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
 
-        var response = chatCompletionService.GetStreamingChatMessageContentsAsync(chatHistory, cancellationToken: cancellationToken);
-        return response;
+            var chatHistory = new ChatHistory();
+            chatHistory.AddSystemMessage("You are a useful assistant that replies in a very short style");
+            chatHistory.AddUserMessage(ask);
+
+            var response = chatCompletionService.GetStreamingChatMessageContentsAsync(chatHistory, cancellationToken: cancellationToken);
+
+            await foreach (var item in response.WithCancellation(cancellationToken))
+            {
+                yield return item.Content ?? string.Empty;
+            }
+        }
     })
     .WithName("OllamaChatCompletionStreaming")
     .WithOpenApi();
