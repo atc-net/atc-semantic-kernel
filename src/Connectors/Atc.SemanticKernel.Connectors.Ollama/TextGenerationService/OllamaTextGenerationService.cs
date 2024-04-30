@@ -90,7 +90,10 @@ public sealed class OllamaTextGenerationService
             Context = [],
         };
 
-        await client.StreamCompletion(generateCompletionRequest, responseStreamer, cancellationToken);
+        await client.StreamCompletion(
+            generateCompletionRequest,
+            responseStreamer,
+            cancellationToken);
 
         foreach (var message in messages)
         {
