@@ -93,7 +93,12 @@ public sealed partial class OllamaChatCompletionService
 
         chatHistory.AddAssistantMessage(history.Last().Content);
 
-        return chatHistory;
+        var responseMessage = chatHistory[^1].Content ?? string.Empty;
+
+        return
+        [
+            new ChatMessageContent(AuthorRole.Assistant, responseMessage),
+        ];
     }
 
     public async IAsyncEnumerable<StreamingChatMessageContent> GetStreamingChatMessageContentsAsync(
