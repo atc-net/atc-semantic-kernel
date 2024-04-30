@@ -1,7 +1,7 @@
 global using System.Diagnostics.CodeAnalysis;
 global using System.Runtime.CompilerServices;
 global using Atc.SemanticKernel.Connectors.Ollama.ChatCompletion;
-global using Atc.SemanticKernel.Connectors.Ollama.EmbeddingGeneration;
+global using Atc.SemanticKernel.Connectors.Ollama.TextEmbeddingGeneration;
 global using Atc.SemanticKernel.Connectors.Ollama.TextGenerationService;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;

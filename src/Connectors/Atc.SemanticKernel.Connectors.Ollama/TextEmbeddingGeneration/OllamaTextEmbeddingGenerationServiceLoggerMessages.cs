@@ -1,4 +1,4 @@
-namespace Atc.SemanticKernel.Connectors.Ollama.EmbeddingGeneration;
+﻿namespace Atc.SemanticKernel.Connectors.Ollama.TextEmbeddingGeneration;
 
 /// <summary>
 /// OllamaTextEmbeddingGenerationService LoggerMessages.

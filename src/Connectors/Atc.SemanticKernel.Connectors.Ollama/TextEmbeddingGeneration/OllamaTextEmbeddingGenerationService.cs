@@ -1,6 +1,7 @@
-namespace Atc.SemanticKernel.Connectors.Ollama.EmbeddingGeneration;
+namespace Atc.SemanticKernel.Connectors.Ollama.TextEmbeddingGeneration;
 
 #pragma warning disable SKEXP0001
+
 public sealed partial class OllamaTextEmbeddingGenerationService
     : OllamaServiceBase<OllamaTextEmbeddingGenerationService>, ITextEmbeddingGenerationService
 #pragma warning restore SKEXP0001
