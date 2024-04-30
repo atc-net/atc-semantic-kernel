@@ -45,7 +45,7 @@ app.MapGet("/ollama/chat-completion/non-streaming", async (string ask, Kernel ke
         var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
 
         var chatHistory = new ChatHistory();
-        chatHistory.AddSystemMessage("You are a useful assistant that replies using a funny style");
+        chatHistory.AddSystemMessage("You are a useful assistant that replies in a very short style");
         chatHistory.AddUserMessage(ask);
 
         var response = await chatCompletionService.GetChatMessageContentsAsync(chatHistory, cancellationToken: cancellationToken);
@@ -59,7 +59,7 @@ app.MapGet("/ollama/chat-completion/streaming", (string ask, Kernel kernel, Canc
         var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
 
         var chatHistory = new ChatHistory();
-        chatHistory.AddSystemMessage("You are a useful assistant that replies using a funny style");
+        chatHistory.AddSystemMessage("You are a useful assistant that replies in a very short style");
         chatHistory.AddUserMessage(ask);
 
         var response = chatCompletionService.GetStreamingChatMessageContentsAsync(chatHistory, cancellationToken: cancellationToken);

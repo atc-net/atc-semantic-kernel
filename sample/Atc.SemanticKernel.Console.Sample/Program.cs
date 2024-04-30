@@ -26,6 +26,7 @@ var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
 var history = new ChatHistory();
 history.AddSystemMessage("You are a useful assistant that replies with short messages.");
 Console.WriteLine("Hint: type your question or type 'exit' to leave the conversation");
+Console.WriteLine();
 
 // Chat loop
 while (true)
