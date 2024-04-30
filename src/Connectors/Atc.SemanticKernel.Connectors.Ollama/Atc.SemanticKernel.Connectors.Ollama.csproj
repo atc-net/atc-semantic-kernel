@@ -2,7 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <PackageId>Atc.SemanticKernel.Connectors.Ollama</PackageId>
+    <PackageTags>semantickernel;connector;ollama</PackageTags>
+    <Description>Atc.SemanticKernel.Connectors.Ollama contains a connector for integrating with local llms through Ollama.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Link="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SemanticKernel" Version="1.9.0" />
