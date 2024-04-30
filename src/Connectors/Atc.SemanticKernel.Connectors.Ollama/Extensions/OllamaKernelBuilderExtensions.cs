@@ -127,7 +127,7 @@ public static class OllamaKernelBuilderExtensions
         };
 
 #pragma warning disable SKEXP0001
-        builder.Services.AddSingleton<IEmbeddingGenerationService<string, float>>(factory);
+        builder.Services.AddSingleton<ITextEmbeddingGenerationService>(factory);
 #pragma warning restore SKEXP0001
 
         return builder;
@@ -151,7 +151,7 @@ public static class OllamaKernelBuilderExtensions
                 serviceProvider.GetService<ILoggerFactory>());
 
 #pragma warning disable SKEXP0001
-        builder.Services.AddSingleton<IEmbeddingGenerationService<string, float>>(factory);
+        builder.Services.AddSingleton<ITextEmbeddingGenerationService>(factory);
 #pragma warning restore SKEXP0001
         return builder;
     }
