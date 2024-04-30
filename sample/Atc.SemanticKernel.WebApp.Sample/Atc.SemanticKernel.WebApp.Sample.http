@@ -1,6 +1,26 @@
-@Atc.SemanticKernel.WebApp.Sample_HostAddress = http://localhost:5081
+@Atc.SemanticKernel.WebApp.Sample_HostAddress = https://localhost:7252
 
-GET {{Atc.SemanticKernel.WebApp.Sample_HostAddress}}/weatherforecast/
+### Ollama Text Generation - Non-Streaming
+GET {{Atc.SemanticKernel.WebApp.Sample_HostAddress}}/ollama/text-generation/non-streaming?ask=The%20weather%20in%20denmark%20is
 Accept: application/json
+Content-Type: application/json
 
-###
+### Ollama Text Generation - Streaming
+GET {{Atc.SemanticKernel.WebApp.Sample_HostAddress}}/ollama/text-generation/streaming?ask=The%20weather%20in%20denmark%20is
+Accept: application/json
+Content-Type: application/json
+
+### Ollama Chat Completion - Non-Streaming
+GET {{Atc.SemanticKernel.WebApp.Sample_HostAddress}}/ollama/chat-completion/non-streaming?ask=Say%20hi%20in%20Danish
+Accept: application/json
+Content-Type: application/json
+
+### Ollama Chat Completion - Streaming
+GET {{Atc.SemanticKernel.WebApp.Sample_HostAddress}}/ollama/chat-completion/streaming?ask=Say%20hi%20in%20Danish
+Accept: application/json
+Content-Type: application/json
+
+### Ollama Embedding Generation
+GET {{Atc.SemanticKernel.WebApp.Sample_HostAddress}}/ollama/embedding-generation?input=Say%20hi%20in%20Danish
+Accept: application/json
+Content-Type: application/json
