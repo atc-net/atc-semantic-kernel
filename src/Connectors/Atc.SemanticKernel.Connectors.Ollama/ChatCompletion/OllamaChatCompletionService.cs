@@ -103,13 +103,24 @@ public sealed partial class OllamaChatCompletionService
         [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         var messages = new List<StreamingChatMessageContent>();
+
+        var responseQueue = new Queue<bool>();
+
         var responseStreamer = new ActionResponseStreamer<ChatResponseStream>(x =>
         {
+            if (responseQueue.Count <= 0 ||
+                !responseQueue.Dequeue())
+            {
+                return;
+            }
+
             messages.Add(new StreamingChatMessageContent(AuthorRole.Assistant, x.Message.Content, modelId: client.SelectedModel));
+            responseQueue.Enqueue(item: true);
         });
 
         var chat = client.Chat(responseStreamer);
 
+        // Send system instructions to the LLM
         foreach (var message in chatHistory)
         {
             if (message.Role == AuthorRole.System)
@@ -121,6 +132,8 @@ public sealed partial class OllamaChatCompletionService
         var lastUserMessage = chatHistory.LastOrDefault(x => x.Role == AuthorRole.User);
         var messageToSend = lastUserMessage?.Content ?? string.Empty;
 
+        // Some LLMs return responses to system instruction, so we only want to stream messages back from this point
+        responseQueue.Enqueue(item: true);
         await chat.Send(messageToSend, cancellationToken);
 
         foreach (var message in messages)
