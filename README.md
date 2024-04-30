@@ -32,7 +32,7 @@ It supports the following capabilities by implementing the interfaces (`IChatCom
 
 ### Wire-Up Using KernelBuilder/ServiceCollection Extensions
 
-To seamlessly integrate Ollama services into your application, you can utilize the provided [`KernelBuilder`](src/Connectors/Atc.SemanticKernel.Connectors.Ollama/Extensions/OllamaKernelBuilderExtensions.cs) and [`ServiceCollection`](src/Connectors/Atc.SemanticKernel.Connectors.Ollama/Extensions/OllamaServiceCollectionExtensions.cs) extension methods. These methods simplify the setup process and ensure that the Ollama services are correctly configured and ready to use within your application's service architecture.
+To seamlessly integrate Ollama services into your application, you can utilize the provided [`KernelBuilder`](src/Atc.SemanticKernel.Connectors.Ollama/Extensions/OllamaKernelBuilderExtensions.cs) and [`ServiceCollection`](src/Atc.SemanticKernel.Connectors.Ollama/Extensions/OllamaServiceCollectionExtensions.cs) extension methods. These methods simplify the setup process and ensure that the Ollama services are correctly configured and ready to use within your application's service architecture.
 
 Both methods ensure that the Ollama services are added to the application's service collection and configured according to the specified parameters, making them available throughout your application via dependency injection.
 
