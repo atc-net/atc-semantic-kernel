@@ -7,6 +7,9 @@ builder.Services
         builder.Configuration["Ollama:Model"]!)
     .AddOllamaChatCompletion(
         builder.Configuration["Ollama:Endpoint"]!,
+        builder.Configuration["Ollama:Model"]!)
+    .AddOllamaTextEmbeddingGeneration(
+        builder.Configuration["Ollama:Endpoint"]!,
         builder.Configuration["Ollama:Model"]!);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -66,6 +69,18 @@ app.MapGet("/ollama/chat-completion/streaming", (string ask, Kernel kernel, Canc
         return response;
     })
     .WithName("OllamaChatCompletionStreaming")
+    .WithOpenApi();
+
+app.MapGet("/ollama/embedding-generation", async (string input, Kernel kernel, CancellationToken cancellationToken) =>
+    {
+        #pragma warning disable SKEXP0001
+        var textEmbeddingGenerationService = kernel.GetRequiredService<ITextEmbeddingGenerationService>();
+        #pragma warning restore SKEXP0001
+
+        var embeddings = await textEmbeddingGenerationService.GenerateEmbeddingsAsync([input], cancellationToken: cancellationToken);
+        return embeddings;
+    })
+    .WithName("OllamaEmbeddingGeneration")
     .WithOpenApi();
 
 app.Run();
