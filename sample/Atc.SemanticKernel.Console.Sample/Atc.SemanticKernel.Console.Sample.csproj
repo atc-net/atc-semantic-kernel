@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SemanticKernel.Abstractions" Version="1.9.0" />
+    <PackageReference Include="Microsoft.SemanticKernel.Abstractions" Version="1.10.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Connectors\Atc.SemanticKernel.Connectors.Ollama\Atc.SemanticKernel.Connectors.Ollama.csproj" />
+    <ProjectReference Include="..\..\src\Atc.SemanticKernel.Connectors.Ollama\Atc.SemanticKernel.Connectors.Ollama.csproj" />
   </ItemGroup>
 
 </Project>

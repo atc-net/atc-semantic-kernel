@@ -101,4 +101,4 @@ app.MapGet("/ollama/embedding-generation", async (string input, Kernel kernel, C
     .WithName("OllamaEmbeddingGeneration")
     .WithOpenApi();
 
-app.Run();
+await app.RunAsync();
