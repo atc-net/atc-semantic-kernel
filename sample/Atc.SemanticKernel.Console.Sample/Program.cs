@@ -4,13 +4,19 @@ var ollamaEmbedding = new OllamaTextEmbeddingGenerationService(new Uri("http://l
 
 // semantic kernel builder
 var builder = Kernel.CreateBuilder();
-builder.Services.AddKeyedSingleton<IChatCompletionService>("ollamaChat", ollamaChat);
-builder.Services.AddKeyedSingleton<ITextGenerationService>("ollamaText", ollamaText);
+builder.Services.AddSingleton<IChatCompletionService>(ollamaChat);
+builder.Services.AddSingleton<ITextGenerationService>(ollamaText);
 #pragma warning disable SKEXP0001
-builder.Services.AddKeyedSingleton<ITextEmbeddingGenerationService>("ollamaEmbedding", ollamaEmbedding);
+builder.Services.AddSingleton<ITextEmbeddingGenerationService>(ollamaEmbedding);
 #pragma warning restore SKEXP0001
 
 var kernel = builder.Build();
+
+Console.WriteLine("====================");
+Console.WriteLine("InvokePrompt DEMO");
+Console.WriteLine("====================");
+var promptResponse = await kernel.InvokePromptAsync("say hi in swedish");
+Console.WriteLine(promptResponse.ToString());
 
 Console.WriteLine("====================");
 Console.WriteLine("TEXT GENERATION DEMO");
@@ -41,8 +47,9 @@ while (true)
     }
 
     history.AddUserMessage(input);
-    history = (ChatHistory)await chatCompletionService.GetChatMessageContentsAsync(history);
-    Console.WriteLine(history[^1].Content);
+    var chatResponse = await chatCompletionService.GetChatMessageContentsAsync(history);
+
+    Console.WriteLine(chatResponse[^1].Content);
     Console.WriteLine("---");
 }
 
