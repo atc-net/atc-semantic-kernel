@@ -19,7 +19,12 @@ public abstract class OllamaServiceBase<T>
     public IReadOnlyDictionary<string, object?> Attributes
         => AiServiceAttributes;
 
-    // TODO: Documentation
+    /// <summary>
+    /// Initializes a new instance of the OllamaServiceBase class using specified logger factory and API client.
+    /// </summary>
+    /// <param name="loggerFactory">The factory to create a logger, or null to use a null logger.</param>
+    /// <param name="client">The Ollama API client used for communication.</param>
+    /// <exception cref="ArgumentNullException">Thrown if the client is null.</exception>
     protected OllamaServiceBase(
         ILoggerFactory? loggerFactory,
         OllamaApiClient client)
@@ -35,6 +40,12 @@ public abstract class OllamaServiceBase<T>
         AddAttribute(AIServiceExtensions.ModelIdKey, client.SelectedModel);
     }
 
+    /// <summary>
+    /// Initializes a new instance of the OllamaServiceBase class using specified logger factory, endpoint URI, and model ID.
+    /// </summary>
+    /// <param name="loggerFactory">The factory to create a logger, or null to use a null logger.</param>
+    /// <param name="endpoint">The URI of the endpoint to connect to, or null for the default endpoint.</param>
+    /// <param name="modelId">The model ID to use, or null for the default model ID.</param>
     protected OllamaServiceBase(
         ILoggerFactory? loggerFactory,
         Uri? endpoint = null,
@@ -54,6 +65,11 @@ public abstract class OllamaServiceBase<T>
         AddAttribute(AIServiceExtensions.EndpointKey, endpointUri);
     }
 
+    /// <summary>
+    /// Adds an attribute to the AI service attributes storage if the value is not null or empty.
+    /// </summary>
+    /// <param name="key">The key under which to store the value.</param>
+    /// <param name="value">The value to store, if not null or empty.</param>
     internal void AddAttribute(
         string key,
         string? value)
