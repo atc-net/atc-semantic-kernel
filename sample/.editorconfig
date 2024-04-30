@@ -50,4 +50,6 @@ dotnet_diagnostic.S1075.severity = none             # Refactor your code not to 
 # Custom - Code Analyzers Rules
 ##########################################
 
+dotnet_diagnostic.S1192.severity = none              # Define a constant instead of using this literal
+
 dotnet_diagnostic.CA1303.severity = none             # Do not pass literals as localized parameters
