@@ -1,10 +1,8 @@
 namespace Atc.SemanticKernel.Connectors.Ollama.TextGenerationService;
 
-public sealed class OllamaTextGenerationService
+public sealed partial class OllamaTextGenerationService
     : OllamaServiceBase<OllamaTextGenerationService>, ITextGenerationService
 {
-    // TODO: Add partial source-generated logging
-
     /// <summary>
     /// Initializes a new instance of the <see cref="OllamaTextGenerationService"/> class.
     /// </summary>
@@ -61,12 +59,16 @@ public sealed class OllamaTextGenerationService
         Kernel? kernel = null,
         CancellationToken cancellationToken = default)
     {
+        LogTextCompletionStarted(prompt);
+
         var response = await client.GetCompletion(
             prompt,
             context: null,
             CancellationToken.None);
 
         var textContext = new TextContent(response.Response);
+        LogTextCompletionSucceeded(prompt);
+
         return [textContext];
     }
 
@@ -76,6 +78,8 @@ public sealed class OllamaTextGenerationService
         Kernel? kernel = null,
         [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
+        LogTextCompletionStreamingStarted(prompt);
+
         var messages = new List<string>();
         var responseStreamer = new ActionResponseStreamer<GenerateCompletionResponseStream>(x =>
         {
@@ -99,5 +103,7 @@ public sealed class OllamaTextGenerationService
         {
             yield return new StreamingTextContent(message);
         }
+
+        LogTextCompletionStreamingSucceeded(prompt);
     }
 }

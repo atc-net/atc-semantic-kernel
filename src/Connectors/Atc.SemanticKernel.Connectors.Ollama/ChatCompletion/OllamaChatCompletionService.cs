@@ -7,8 +7,6 @@ namespace Atc.SemanticKernel.Connectors.Ollama.ChatCompletion;
 public sealed partial class OllamaChatCompletionService
     : OllamaServiceBase<OllamaChatCompletionService>, IChatCompletionService
 {
-    // TODO: Add partial source-generated logging
-
     /// <summary>
     /// Initializes a new instance of the <see cref="OllamaChatCompletionService"/> class.
     /// </summary>
@@ -76,6 +74,11 @@ public sealed partial class OllamaChatCompletionService
         Kernel? kernel = null,
         CancellationToken cancellationToken = default)
     {
+        var lastUserMessage = chatHistory.LastOrDefault(x => x.Role == AuthorRole.User);
+        var messageToSend = lastUserMessage?.Content ?? string.Empty;
+
+        LogChatCompletionStarted(messageToSend);
+
         var chat = new Chat(client, _ => { });
 
         foreach (var message in chatHistory)
@@ -86,14 +89,13 @@ public sealed partial class OllamaChatCompletionService
             }
         }
 
-        var lastUserMessage = chatHistory.LastOrDefault(x => x.Role == AuthorRole.User);
-        var messageToSend = lastUserMessage?.Content ?? string.Empty;
-
         var history = await chat.Send(messageToSend, cancellationToken);
 
         chatHistory.AddAssistantMessage(history.Last().Content);
 
         var responseMessage = chatHistory[^1].Content ?? string.Empty;
+
+        LogChatCompletionSucceeded(messageToSend);
 
         return
         [
@@ -107,6 +109,11 @@ public sealed partial class OllamaChatCompletionService
         Kernel? kernel = null,
         [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
+        var lastUserMessage = chatHistory.LastOrDefault(x => x.Role == AuthorRole.User);
+        var messageToSend = lastUserMessage?.Content ?? string.Empty;
+
+        LogChatCompletionStreamingStarted(messageToSend);
+
         var messages = new List<StreamingChatMessageContent>();
 
         var responseQueue = new Queue<bool>();
@@ -134,10 +141,7 @@ public sealed partial class OllamaChatCompletionService
             }
         }
 
-        var lastUserMessage = chatHistory.LastOrDefault(x => x.Role == AuthorRole.User);
-        var messageToSend = lastUserMessage?.Content ?? string.Empty;
-
-        // Some LLMs return responses to system instruction, so we only want to stream messages back from this point
+        // Some LLMs models return responses to system instruction, so we only want to stream messages back from this point
         responseQueue.Enqueue(item: true);
         await chat.Send(messageToSend, cancellationToken);
 
@@ -145,5 +149,7 @@ public sealed partial class OllamaChatCompletionService
         {
             yield return new StreamingChatMessageContent(AuthorRole.Assistant, message.Content, modelId: message.ModelId);
         }
+
+        LogChatCompletionStreamingSucceeded(messageToSend);
     }
 }

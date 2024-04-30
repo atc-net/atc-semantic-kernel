@@ -7,12 +7,38 @@ namespace Atc.SemanticKernel.Connectors.Ollama.ChatCompletion;
 public sealed partial class OllamaChatCompletionService
 {
     [LoggerMessage(
-        EventId = LoggingEventIdConstants.OllamaChatCompletionService.XXX,
-        Level = LogLevel.Error,
-        Message = "{callerMethodName}({callerLineNumber}) - XXX '{xxx}': {errorMessage}")]
-    private partial void LogXXXX(
-        string xxx,
-        string? errorMessage,
+        EventId = LoggingEventIdConstants.OllamaChatCompletionService.ChatMessageContentStarted,
+        Level = LogLevel.Trace,
+        Message = "{callerMethodName}({callerLineNumber}) - Starting to generate chat completion for '{prompt}'")]
+    private partial void LogChatCompletionStarted(
+        string prompt,
+        [CallerMemberName] string callerMethodName = "",
+        [CallerLineNumber] int callerLineNumber = 0);
+
+    [LoggerMessage(
+        EventId = LoggingEventIdConstants.OllamaChatCompletionService.ChatMessageContentSucceeded,
+        Level = LogLevel.Trace,
+        Message = "{callerMethodName}({callerLineNumber}) - Successfully generated chat completion for prompt '{prompt}'")]
+    private partial void LogChatCompletionSucceeded(
+        string prompt,
+        [CallerMemberName] string callerMethodName = "",
+        [CallerLineNumber] int callerLineNumber = 0);
+
+    [LoggerMessage(
+        EventId = LoggingEventIdConstants.OllamaChatCompletionService.ChatMessageContentStreamingStarted,
+        Level = LogLevel.Trace,
+        Message = "{callerMethodName}({callerLineNumber}) - Starting to generate streaming chat completion for '{prompt}'")]
+    private partial void LogChatCompletionStreamingStarted(
+        string prompt,
+        [CallerMemberName] string callerMethodName = "",
+        [CallerLineNumber] int callerLineNumber = 0);
+
+    [LoggerMessage(
+        EventId = LoggingEventIdConstants.OllamaChatCompletionService.ChatMessageContentStreamingSucceeded,
+        Level = LogLevel.Trace,
+        Message = "{callerMethodName}({callerLineNumber}) - Successfully generated streaming chat completion for prompt '{prompt}'")]
+    private partial void LogChatCompletionStreamingSucceeded(
+        string prompt,
         [CallerMemberName] string callerMethodName = "",
         [CallerLineNumber] int callerLineNumber = 0);
 }

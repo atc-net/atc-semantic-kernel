@@ -1,7 +1,7 @@
 namespace Atc.SemanticKernel.Connectors.Ollama.EmbeddingGeneration;
 
 #pragma warning disable SKEXP0001
-public sealed class OllamaTextEmbeddingGenerationService
+public sealed partial class OllamaTextEmbeddingGenerationService
     : OllamaServiceBase<OllamaTextEmbeddingGenerationService>, ITextEmbeddingGenerationService
 #pragma warning restore SKEXP0001
 {
@@ -77,18 +77,19 @@ public sealed class OllamaTextEmbeddingGenerationService
 
         foreach (var text in data)
         {
+            LogGenerateEmbeddingsStarted(text);
+
             var response = await client.GenerateEmbeddings(text, cancellationToken);
             if (response is not null)
             {
                 var floatArray = Array.ConvertAll(response.Embedding, item => (float)item);
                 var embedding = new ReadOnlyMemory<float>(floatArray);
                 result.Add(embedding);
+                LogGenerateEmbeddingsSucceeded(text);
+                continue;
             }
-            else
-            {
-                // TODO: Log error
-                ////logger.LogError("Unable to connect to ollama at {url} with model {model}", Attributes["base_url"], Attributes["model_id"]);
-            }
+
+            LogFailedToGenerateEmbeddings(text);
         }
 
         return result;
